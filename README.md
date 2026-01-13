@@ -57,3 +57,92 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+# Accent Networks Ltd - Website
+
+Modern, CMS-enabled website for Accent Networks Ltd, a Zambian ICT company.
+
+## Tech Stack
+
+- **Backend:** Laravel 11
+- **Database:** PostgreSQL
+- **Admin Panel:** Filament 3
+- **Frontend:** Blade, Tailwind CSS 3, Alpine.js
+- **Media Handling:** Spatie Media Library
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Clivet-lug/accent-networks.git
+cd accent-networks
+```
+
+2. Install dependencies:
+```bash
+composer install
+npm install
+```
+
+3. Configure environment:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. Setup database:
+- Create PostgreSQL database named `accent_networks`
+- Update `.env` with database credentials
+- Run migrations: `php artisan migrate`
+
+5. Create admin user:
+```bash
+php artisan make:filament-user
+```
+
+6. Link storage and build assets:
+```bash
+php artisan storage:link
+npm run dev
+```
+
+7. Start development server:
+```bash
+php artisan serve
+```
+
+Access admin panel at: `http://localhost:8000/admin`
+
+## Project Structure
+```
+├── app/
+│   ├── Filament/Resources/     # Admin panel resources
+│   ├── Models/                 # Eloquent models
+│   └── Http/Controllers/       # Frontend controllers
+├── resources/
+│   ├── views/
+│   │   ├── frontend/          # Public-facing views
+│   │   └── components/        # Reusable components
+│   └── css/                   # Stylesheets
+├── database/
+│   └── migrations/            # Database migrations
+└── public/
+    └── images/                # Public images
+```
+
+## Development
+
+- Admin panel: `/admin`
+- Public site: `/`
+
+## Client Information
+
+**Accent Networks Ltd**
+- Location: Villa Elizabetha, Lusaka, Zambia
+- Services: ICT Solutions, Telecommunications, Data Networks
+- Website: www.accent.co.zm
+
+## License
+
+Proprietary - Developed for Accent Networks Ltd
