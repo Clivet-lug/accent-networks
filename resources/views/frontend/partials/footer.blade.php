@@ -49,6 +49,8 @@
                             class="text-gray-300 hover:text-accent-blue-light transition text-sm">Projects</a></li>
                     <li><a href="{{ route('clients.index') }}"
                             class="text-gray-300 hover:text-accent-blue-light transition text-sm">Our Clients</a></li>
+                    <li><a href="{{ route('blog.index') }}"
+                            class="text-gray-300 hover:text-accent-blue-light transition text-sm">News</a></li>
                     <li><a href="{{ route('contact.index') }}"
                             class="text-gray-300 hover:text-accent-blue-light transition text-sm">Contact</a></li>
                 </ul>
