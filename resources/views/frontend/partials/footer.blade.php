@@ -60,18 +60,16 @@
             <div>
                 <h4 class="text-lg font-semibold mb-4">Our Services</h4>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-300 hover:text-accent-blue-light transition text-sm">3CX
-                            Phone Systems</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-accent-blue-light transition text-sm">LAN and
-                            WAN Solutions</a></li>
-                    <li><a href="#"
-                            class="text-gray-300 hover:text-accent-blue-light transition text-sm">Telephone
-                            Management</a></li>
-                    <li><a href="#"
-                            class="text-gray-300 hover:text-accent-blue-light transition text-sm">Consultancy
-                            Services</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-accent-blue-light transition text-sm">ICT
-                            Solutions</a></li>
+                    <li><a href="{{ url('/services/3cx-phone-systems') }}"
+                            class="text-gray-300 hover:text-[#5FA9DD] transition text-sm">3CX Phone Systems</a></li>
+                    <li><a href="{{ url('/services/lan-wan-solutions') }}"
+                            class="text-gray-300 hover:text-[#5FA9DD] transition text-sm">LAN and WAN Solutions</a></li>
+                    <li><a href="{{ url('/services/telephone-management') }}"
+                            class="text-gray-300 hover:text-[#5FA9DD] transition text-sm">Telephone Management</a></li>
+                    <li><a href="{{ url('/services/consultancy-services') }}"
+                            class="text-gray-300 hover:text-[#5FA9DD] transition text-sm">Consultancy Services</a></li>
+                    <li><a href="{{ url('/services/ict-solutions') }}"
+                            class="text-gray-300 hover:text-[#5FA9DD] transition text-sm">ICT Solutions</a></li>
                 </ul>
             </div>
 
@@ -125,9 +123,9 @@
     {{-- Bottom Bar --}}
     <div class="border-t border-gray-700">
         <div class="container mx-auto px-4 py-6">
-            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
                 <p>&copy; {{ date('Y') }} Accent Networks Ltd. All rights reserved.</p>
-                <p class="mt-2 md:mt-0">Established 2005 | Incorporated 2008</p>
+                <p class="mt-2 md:mt-0 text-blue-300">Established 2005 | Incorporated 2008</p>
             </div>
         </div>
     </div>

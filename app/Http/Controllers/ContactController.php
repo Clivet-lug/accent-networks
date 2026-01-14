@@ -18,6 +18,7 @@ class ContactController extends Controller
             'phone' => 'nullable|max:20',
             'subject' => 'required|max:255',
             'message' => 'required',
+            'attachment' => 'nullable|file|max:5120', // Max 5MB
         ]);
 
         // For now, just redirect back with success
