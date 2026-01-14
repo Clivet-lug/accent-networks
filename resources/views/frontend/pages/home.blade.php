@@ -1,42 +1,56 @@
 @extends('frontend.layouts.app')
 
 @section('title', 'Accent Networks Ltd - Leading ICT Solutions Provider in Zambia')
-@section('description', 'Accent Networks Ltd provides comprehensive ICT solutions including telecommunications, data
+@section('description',
+    'Accent Networks Ltd provides comprehensive ICT solutions including telecommunications, data
     networks, CCTV systems, and consultancy services across Zambia.')
 
 @section('content')
 
     {{-- Hero Section --}}
     <section
-        class="relative h-screen flex items-center justify-center bg-gradient-to-br from-accent-blue to-accent-blue-light overflow-hidden">
+        class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 overflow-hidden">
 
-        {{-- Background Pattern --}}
-        <div class="absolute inset-0 opacity-10">
+        {{-- Animated Background Pattern --}}
+        <div class="absolute inset-0 opacity-20">
             <div class="absolute inset-0"
                 style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
             </div>
         </div>
 
+        {{-- Floating Elements --}}
+        <div class="absolute inset-0 overflow-hidden">
+            <div
+                class="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob">
+            </div>
+            <div
+                class="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000">
+            </div>
+            <div
+                class="absolute bottom-20 left-20 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000">
+            </div>
+        </div>
+
         {{-- Hero Content --}}
-        <div class="container mx-auto px-4 z-10">
+        <div class="container mx-auto px-4 z-10 relative">
             <div class="max-w-4xl mx-auto text-center text-white">
-                <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-fade-in-up">
                     Voice | Data | Networks
                 </h1>
-                <p class="text-xl md:text-2xl mb-8 text-white/90">
+                <p class="text-xl md:text-3xl mb-8 text-blue-200 animate-fade-in-up animation-delay-200">
                     Leading ICT Solutions Provider in Zambia Since 2005
                 </p>
-                <p class="text-lg mb-10 text-white/80 max-w-2xl mx-auto">
+                <p class="text-lg mb-10 text-blue-100 max-w-2xl mx-auto animate-fade-in-up animation-delay-400">
                     Comprehensive telecommunications, data networks, CCTV systems, and consultancy services for businesses
                     across Zambia
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animation-delay-600">
                     <a href="{{ route('services.index') }}"
-                        class="bg-white text-accent-blue px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105">
+                        class="bg-white text-blue-900 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition transform hover:scale-105 shadow-lg">
                         Explore Our Services
                     </a>
                     <a href="{{ route('contact.index') }}"
-                        class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-accent-blue transition transform hover:scale-105">
+                        class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition transform hover:scale-105 shadow-lg">
                         Get a Quote
                     </a>
                 </div>
@@ -44,7 +58,7 @@
         </div>
 
         {{-- Scroll Indicator --}}
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
