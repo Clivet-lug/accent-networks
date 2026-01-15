@@ -98,55 +98,142 @@
         </div>
     </section>
 
+    {{-- About Us Preview Section --}}
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+
+                {{-- Image --}}
+                <div class="relative">
+                    <img src="{{ asset('images/about/team.jpg') }}" alt="Accent Networks Team"
+                        class="rounded-2xl shadow-2xl w-full h-[500px] object-cover">
+
+                    {{-- Stats Overlay --}}
+                    <div
+                        class="absolute -bottom-8 -right-8 bg-gradient-to-br from-[#003E7E] to-[#5FA9DD] text-white p-8 rounded-2xl shadow-2xl">
+                        <div class="text-center">
+                            <p class="text-5xl font-bold mb-2" x-data="{ count: 0 }" x-init="setInterval(() => { if (count < 19) count++ }, 100)">
+                                <span x-text="count"></span>+
+                            </p>
+                            <p class="text-sm">Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Content --}}
+                <div>
+                    <h2 class="text-4xl font-bold mb-6" style="color: #003E7E;">
+                        Leading ICT Solutions Provider Since 2005
+                    </h2>
+
+                    <div class="w-24 h-1 bg-gradient-to-r from-[#003E7E] to-[#5FA9DD] mb-6"></div>
+
+                    <p class="text-lg text-gray-600 mb-6">
+                        Accent Networks Ltd was established in 2005 and incorporated as a limited company in 2008.
+                        We provide a comprehensive range of Telecoms and Data services across Zambia.
+                    </p>
+
+                    <p class="text-lg text-gray-600 mb-8">
+                        Managed by a highly trained, experienced, and innovative professional team, we're committed to
+                        delivering excellence in telecommunications and data networks.
+                    </p>
+
+                    {{-- Key Points --}}
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start">
+                            <div
+                                class="w-6 h-6 rounded-full bg-[#5FA9DD]/20 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                <svg class="w-4 h-4" style="color: #003E7E;" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700">Trusted by leading organizations across Zambia</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div
+                                class="w-6 h-6 rounded-full bg-[#5FA9DD]/20 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                <svg class="w-4 h-4" style="color: #003E7E;" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700">Comprehensive ICT solutions tailored to your needs</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div
+                                class="w-6 h-6 rounded-full bg-[#5FA9DD]/20 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                <svg class="w-4 h-4" style="color: #003E7E;" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700">Partners with global technology leaders</p>
+                        </div>
+                    </div>
+
+                    <a href="{{ route('about') }}"
+                        class="inline-block px-8 py-4 rounded-lg font-semibold text-white transition transform hover:scale-105 shadow-lg"
+                        style="background: #003E7E;">
+                        Learn More About Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{-- Services Section --}}
-    <section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section class="py-20" style="background-color: #f8f9fa;">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-4"></div>
+                <h2 class="text-4xl font-bold mb-4" style="color: #003E7E;">Our Services</h2>
+                <div class="w-24 h-1 mx-auto mb-4" style="background-color: #5FA9DD;"></div>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                     Comprehensive ICT solutions tailored to meet your business needs
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @forelse($services as $index => $service)
+                @forelse($services as $service)
                     <div
-                        class="group relative bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 overflow-hidden">
+                        class="group bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3">
 
-                        {{-- Gradient Background on Hover --}}
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        </div>
-
-                        {{-- Content --}}
-                        <div class="relative z-10">
-                            {{-- Colorful Icon --}}
-                            <div
-                                class="w-16 h-16 mb-6 rounded-xl bg-gradient-to-br {{ $index % 3 == 0 ? 'from-blue-400 to-blue-600' : ($index % 3 == 1 ? 'from-purple-400 to-purple-600' : 'from-pink-400 to-pink-600') }} flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {{-- Service Image or Icon --}}
+                        @if ($service->featured_image)
+                            <div class="mb-6 overflow-hidden rounded-xl">
+                                <img src="{{ Storage::url($service->featured_image) }}" alt="{{ $service->name }}"
+                                    class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                            </div>
+                        @else
+                            <div class="w-16 h-16 mb-6 rounded-xl flex items-center justify-center"
+                                style="background-color: #003E7E;">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
                                     </path>
                                 </svg>
                             </div>
+                        @endif
 
-                            <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-white transition-colors">
-                                {{ $service->name }}
-                            </h3>
-                            <p class="text-gray-600 mb-6 group-hover:text-white/90 transition-colors">
-                                {{ $service->short_description ?? Str::limit($service->description, 120) }}
-                            </p>
-                            <a href="{{ route('services.show', $service->slug) }}"
-                                class="inline-flex items-center text-blue-600 font-semibold group-hover:text-white transition-colors">
-                                Learn More
-                                <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </a>
-                        </div>
+                        <h3 class="text-2xl font-bold mb-4" style="color: #003E7E;">
+                            {{ $service->name }}
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            {{ $service->short_description ?? Str::limit($service->description, 120) }}
+                        </p>
+                        <a href="{{ route('services.show', $service->slug) }}"
+                            class="inline-flex items-center font-semibold transition" style="color: #003E7E;">
+                            Learn More
+                            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
                     </div>
                 @empty
                     <div class="col-span-3 text-center py-12">
@@ -157,7 +244,8 @@
 
             <div class="text-center mt-12">
                 <a href="{{ route('services.index') }}"
-                    class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-4 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition transform hover:scale-105 shadow-lg">
+                    class="inline-block px-10 py-4 rounded-lg font-semibold text-white hover:opacity-90 transition shadow-lg"
+                    style="background-color: #003E7E;">
                     View All Services
                 </a>
             </div>
@@ -240,31 +328,151 @@
         </div>
     </section>
 
-    {{-- Client Logos Section --}}
-    <section class="py-20 bg-gray-50">
+    {{-- Client Logos Carousel --}}
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-accent-gray-dark mb-4">Trusted By Leading Organizations</h2>
-                <p class="text-lg text-accent-gray-medium">
-                    Proud to serve some of Zambia's most respected institutions
-                </p>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Trusted By Leading Organizations</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-[#003E7E] to-[#5FA9DD] mx-auto mb-4"></div>
+                <p class="text-lg text-gray-600">Proud to serve some of Zambia's most respected institutions</p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
-                @forelse($clients as $client)
-                    <div
-                        class="flex items-center justify-center p-4 bg-white rounded-lg shadow hover:shadow-lg transition grayscale hover:grayscale-0">
-                        {{-- Client Logo Placeholder --}}
-                        <div
-                            class="w-full h-20 flex items-center justify-center text-accent-gray-medium font-bold text-sm">
-                            {{ $client->name }}
+            @if ($clients->count() > 0)
+                <div x-data="{
+                    currentIndex: 0,
+                    clients: {{ $clients->count() }},
+                    autoplay: null
+                }" x-init="autoplay = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % Math.ceil(clients / 4);
+                }, 3000)" @mouseenter="clearInterval(autoplay)"
+                    @mouseleave="autoplay = setInterval(() => { currentIndex = (currentIndex + 1) % Math.ceil(clients / 4); }, 3000)"
+                    class="relative overflow-hidden">
+
+                    <div class="flex transition-transform duration-500"
+                        :style="`transform: translateX(-${currentIndex * 100}%)`">
+                        @foreach ($clients->chunk(4) as $chunk)
+                            <div class="flex-shrink-0 w-full grid grid-cols-2 md:grid-cols-4 gap-8 px-4">
+                                @foreach ($chunk as $client)
+                                    <div
+                                        class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 grayscale hover:grayscale-0 flex items-center justify-center">
+                                        @if ($client->logo)
+                                            <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}"
+                                                class="max-h-20 w-auto mx-auto">
+                                        @else
+                                            <p class="text-center font-bold text-gray-700">{{ $client->name }}</p>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{-- Navigation Dots --}}
+                    <div class="flex justify-center gap-2 mt-8">
+                        @for ($i = 0; $i < ceil($clients->count() / 4); $i++)
+                            <button @click="currentIndex = {{ $i }}"
+                                :class="currentIndex === {{ $i }} ? 'bg-[#003E7E] w-8' : 'bg-gray-300 w-3'"
+                                class="h-3 rounded-full transition-all"></button>
+                        @endfor
+                    </div>
+                </div>
+            @endif
+        </div>
+    </section>
+
+    {{-- Testimonials Slider
+    <section class="py-20 bg-gradient-to-br from-[#003E7E] to-[#5FA9DD] text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">What Our Clients Say</h2>
+                <div class="w-24 h-1 bg-white/30 mx-auto"></div>
+            </div>
+
+            @if ($testimonials->count() > 0)
+                <div x-data="{ currentTestimonial: 0 }" x-init="setInterval(() => { currentTestimonial = (currentTestimonial + 1) % {{ $testimonials->count() }} }, 5000)" class="max-w-4xl mx-auto">
+
+                    @foreach ($testimonials as $index => $testimonial)
+                        <div x-show="currentTestimonial === {{ $index }}"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100" class="text-center">
+
+                            {{-- Quote Icon
+                            <svg class="w-16 h-16 mx-auto mb-6 text-white/30" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
+                            </svg>
+
+                            {{-- Content
+                            <p class="text-xl md:text-2xl mb-8 italic">
+                                "{{ $testimonial->content }}"
+                            </p>
+
+                            {{-- Rating -
+                            <div class="flex justify-center gap-1 mb-6">
+                                @for ($i = 0; $i < 5; $i++)
+                                    <svg class="w-6 h-6 {{ $i < $testimonial->rating ? 'text-yellow-400' : 'text-white/30' }}"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                @endfor
+                            </div>
+
+                            {{-- Author --
+                            <p class="font-bold text-lg">{{ $testimonial->client_name }}</p>
+                            <p class="text-white/80">{{ $testimonial->position }} at {{ $testimonial->company }}</p>
                         </div>
+                    @endforeach
+
+                    {{-- Dots --
+                    <div class="flex justify-center gap-2 mt-12">
+                        @foreach ($testimonials as $index => $testimonial)
+                            <button @click="currentTestimonial = {{ $index }}"
+                                :class="currentTestimonial === {{ $index }} ? 'bg-white w-8' : 'bg-white/30 w-3'"
+                                class="h-3 rounded-full transition-all"></button>
+                        @endforeach
                     </div>
-                @empty
-                    <div class="col-span-full text-center py-12">
-                        <p class="text-gray-500">Client logos will appear here.</p>
-                    </div>
-                @endforelse
+                </div>
+            @endif
+        </div>
+    </section> --}}
+
+    {{-- Stats Counter --}}
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+                {{-- Years in Business --}}
+                <div class="text-center">
+                    <p class="text-5xl md:text-6xl font-bold mb-2" style="color: #003E7E;">
+                        19+
+                    </p>
+                    <p class="text-gray-600 font-semibold">Years in Business</p>
+                </div>
+
+                {{-- Projects Completed --}}
+                <div class="text-center">
+                    <p class="text-5xl md:text-6xl font-bold mb-2" style="color: #5FA9DD;">
+                        500+
+                    </p>
+                    <p class="text-gray-600 font-semibold">Projects Completed</p>
+                </div>
+
+                {{-- Clients Served --}}
+                <div class="text-center">
+                    <p class="text-5xl md:text-6xl font-bold mb-2" style="color: #003E7E;">
+                        100+
+                    </p>
+                    <p class="text-gray-600 font-semibold">Satisfied Clients</p>
+                </div>
+
+                {{-- Team Members --}}
+                <div class="text-center">
+                    <p class="text-5xl md:text-6xl font-bold mb-2" style="color: #5FA9DD;">
+                        25+
+                    </p>
+                    <p class="text-gray-600 font-semibold">Expert Team Members</p>
+                </div>
             </div>
         </div>
     </section>
