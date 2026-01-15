@@ -29,7 +29,7 @@
                     subtitle: '3CX Phone Systems & CCTV Solutions'
                 }
             ]
-        }" x-init="setInterval(() => { currentSlide = (currentSlide + 1) % slides.length }, 9000)" class="relative h-full">
+        }" x-init="setInterval(() => { currentSlide = (currentSlide + 1) % slides.length }, 5000)" class="relative h-full">
 
             {{-- Slides --}}
             <template x-for="(slide, index) in slides" :key="index">
@@ -37,9 +37,10 @@
                     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                     x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0" class="absolute inset-0">
-                    {{-- Background Image with Overlay --}}
-                    <div class="absolute inset-0 bg-gradient-to-br from-[#003E7E]/90 to-[#5FA9DD]/80">
-                        <img :src="slide.image" class="w-full h-full object-cover mix-blend-overlay" alt="Hero slide">
+                    {{-- Background Image with Overlay (SOLID COLOR) --}}
+                    <div class="absolute inset-0" style="background-color: #003E7E; opacity: 0.9;">
+                        <img :src="slide.image" class="w-full h-full object-cover mix-blend-overlay opacity-50"
+                            alt="Hero slide">
                     </div>
 
                     {{-- Content --}}
@@ -50,12 +51,13 @@
 
                             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                                 <a href="{{ route('services.index') }}"
-                                    class="bg-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105 shadow-lg"
+                                    class="bg-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition shadow-lg"
                                     style="color: #003E7E;">
                                     Explore Our Services
                                 </a>
                                 <a href="{{ route('contact.index') }}"
-                                    class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white transition transform hover:scale-105 shadow-lg hover:text-[#003E7E]">
+                                    class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white transition shadow-lg"
+                                    style="hover:color: #003E7E;">
                                     Get a Quote
                                 </a>
                             </div>
@@ -67,34 +69,28 @@
             {{-- Slide Indicators --}}
             <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
                 <template x-for="(slide, index) in slides" :key="index">
-                    <button @click="currentSlide = index"
-                        :class="currentSlide === index ? 'bg-white w-8' : 'bg-white/50 w-3'"
-                        class="h-3 rounded-full transition-all duration-300"></button>
+                    <button @click="currentSlide = index" class="h-3 rounded-full transition-all duration-300"
+                        :class="currentSlide === index ? 'bg-white w-8' : 'w-3'"
+                        :style="currentSlide === index ? '' : 'background-color: rgba(255,255,255,0.5);'"></button>
                 </template>
             </div>
 
             {{-- Navigation Arrows --}}
             <button @click="currentSlide = (currentSlide - 1 + slides.length) % slides.length"
-                class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-4 rounded-full transition z-20">
+                class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white p-4 rounded-full transition z-20"
+                style="background-color: rgba(255,255,255,0.2);">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
             </button>
 
             <button @click="currentSlide = (currentSlide + 1) % slides.length"
-                class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-4 rounded-full transition z-20">
+                class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white p-4 rounded-full transition z-20"
+                style="background-color: rgba(255,255,255,0.2);">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
             </button>
-
-            {{-- Scroll Indicator --}}
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
-                    </path>
-                </svg>
-            </div>
         </div>
     </section>
 
