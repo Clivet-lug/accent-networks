@@ -195,41 +195,45 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @forelse($services as $service)
                     <div
-                        class="group bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3">
+                        class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 h-96">
 
-                        {{-- Service Image or Icon --}}
+                        {{-- Full Background Image --}}
                         @if ($service->featured_image)
-                            <div class="mb-6 overflow-hidden rounded-xl">
-                                <img src="{{ Storage::url($service->featured_image) }}" alt="{{ $service->name }}"
-                                    class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
-                            </div>
+                            <img src="{{ Storage::url($service->featured_image) }}" alt="{{ $service->name }}"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         @else
-                            <div class="w-16 h-16 mb-6 rounded-xl flex items-center justify-center"
-                                style="background-color: #003E7E;">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
-                                    </path>
-                                </svg>
-                            </div>
+                            {{-- Placeholder gradient if no image --}}
+                            <div class="absolute inset-0 w-full h-full"
+                                style="background: linear-gradient(135deg, #003E7E 0%, #5FA9DD 100%);"></div>
                         @endif
 
-                        <h3 class="text-2xl font-bold mb-4" style="color: #003E7E;">
-                            {{ $service->name }}
-                        </h3>
-                        <p class="text-gray-600 mb-6">
-                            {{ $service->short_description ?? Str::limit($service->description, 120) }}
-                        </p>
-                        <a href="{{ route('services.show', $service->slug) }}"
-                            class="inline-flex items-center font-semibold transition" style="color: #003E7E;">
-                            Learn More
-                            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </a>
+                        {{-- Dark overlay (always visible) --}}
+                        <div class="absolute inset-0 bg-black opacity-40"></div>
+
+                        {{-- Blue overlay on hover --}}
+                        <div class="absolute inset-0 opacity-0 group-hover:opacity-90 transition-opacity duration-300"
+                            style="background-color: #003E7E;"></div>
+
+                        {{-- Content --}}
+                        <div class="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
+                            <h3
+                                class="text-2xl font-bold mb-3 transform group-hover:translate-y-[-20px] transition-transform duration-300">
+                                {{ $service->name }}
+                            </h3>
+                            <p
+                                class="text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-y-[-10px]">
+                                {{ $service->short_description ?? Str::limit($service->description, 100) }}
+                            </p>
+                            <a href="{{ route('services.show', $service->slug) }}"
+                                class="inline-flex items-center font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                Learn More
+                                <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 @empty
                     <div class="col-span-3 text-center py-12">
@@ -252,53 +256,53 @@
     <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-4"></div>
+                <h2 class="text-4xl font-bold mb-4" style="color: #003E7E;">Featured Projects</h2>
+                <div class="w-24 h-1 mx-auto mb-4" style="background-color: #5FA9DD;"></div>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                     Showcasing our expertise through successful implementations
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @forelse($projects as $index => $project)
+                @forelse($projects as $project)
                     <div
-                        class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 h-96">
 
-                        {{-- Colorful Gradient Background --}}
-                        <div
-                            class="aspect-video bg-gradient-to-br {{ $index % 3 == 0 ? 'from-blue-500 via-purple-500 to-pink-500' : ($index % 3 == 1 ? 'from-green-400 via-blue-500 to-purple-600' : 'from-yellow-400 via-red-500 to-pink-500') }} relative overflow-hidden">
-
-                            {{-- Animated Circles --}}
-                            <div class="absolute top-10 left-10 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse">
-                            </div>
-                            <div
-                                class="absolute bottom-10 right-10 w-40 h-40 bg-white/20 rounded-full blur-3xl animate-pulse animation-delay-2000">
-                            </div>
-
-                            {{-- Letter Overlay --}}
+                        {{-- Project Image/Background --}}
+                        <div class="absolute inset-0 w-full h-full" style="background-color: #003E7E;">
                             <div
                                 class="absolute inset-0 flex items-center justify-center text-white text-8xl font-bold opacity-10">
                                 {{ strtoupper(substr($project->title, 0, 1)) }}
                             </div>
                         </div>
 
-                        {{-- Project Info --}}
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent flex flex-col justify-end p-6 text-white">
+                        {{-- Blue overlay becomes lighter on hover --}}
+                        <div class="absolute inset-0 group-hover:opacity-80 transition-opacity duration-300"
+                            style="background-color: #003E7E;"></div>
+
+                        {{-- Content --}}
+                        <div class="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
 
                             {{-- Category Badge --}}
-                            <span
-                                class="inline-block self-start px-4 py-1 mb-3 text-xs font-semibold bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
-                                {{ $project->category->name ?? 'Uncategorized' }}
-                            </span>
+                            @if ($project->category)
+                                <span
+                                    class="inline-block self-start px-4 py-1 mb-3 text-xs font-semibold rounded-full border border-white/30"
+                                    style="background-color: rgba(95, 169, 221, 0.2);">
+                                    {{ $project->category->name }}
+                                </span>
+                            @endif
 
-                            <h3 class="text-2xl font-bold mb-2">{{ $project->title }}</h3>
-                            <p class="text-sm text-white/90 mb-4 line-clamp-2">
+                            <h3
+                                class="text-2xl font-bold mb-2 transform group-hover:translate-y-[-10px] transition-transform duration-300">
+                                {{ $project->title }}
+                            </h3>
+
+                            <p class="text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 {{ Str::limit($project->description, 100) }}
                             </p>
 
                             <a href="{{ route('projects.show', $project->slug) }}"
-                                class="inline-flex items-center text-white font-semibold group-hover:text-blue-300 transition">
+                                class="inline-flex items-center font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 View Project
                                 <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -317,7 +321,8 @@
 
             <div class="text-center mt-12">
                 <a href="{{ route('projects.index') }}"
-                    class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-4 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition transform hover:scale-105 shadow-lg">
+                    class="inline-block px-10 py-4 rounded-lg font-semibold text-white hover:opacity-90 transition shadow-lg"
+                    style="background-color: #003E7E;">
                     View All Projects
                 </a>
             </div>
@@ -470,6 +475,90 @@
                     <p class="text-gray-600 font-semibold">Expert Team Members</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    {{-- Latest News Section --}}
+    <section class="py-20" style="background-color: #f8f9fa;">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4" style="color: #003E7E;">Latest News & Updates</h2>
+                <div class="w-24 h-1 mx-auto mb-4" style="background-color: #5FA9DD;"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Stay informed about the latest in ICT solutions and industry news
+                </p>
+            </div>
+
+            @php
+                $latestPosts = \App\Models\BlogPost::published()->latest()->take(3)->get();
+            @endphp
+
+            @if ($latestPosts->count() > 0)
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    @foreach ($latestPosts as $post)
+                        <article
+                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2">
+
+                            {{-- Featured Image --}}
+                            <div class="aspect-video relative overflow-hidden" style="background-color: #003E7E;">
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center text-white text-6xl font-bold opacity-20">
+                                    {{ strtoupper(substr($post->title, 0, 1)) }}
+                                </div>
+
+                                @if ($post->category)
+                                    <div class="absolute top-4 left-4 z-10">
+                                        <span class="px-3 py-1 rounded-full text-xs font-semibold text-white"
+                                            style="background-color: #5FA9DD;">
+                                            {{ $post->category }}
+                                        </span>
+                                    </div>
+                                @endif
+                            </div>
+
+                            {{-- Post Content --}}
+                            <div class="p-6">
+                                <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                                    <span class="flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                        {{ $post->published_at->format('M d, Y') }}
+                                    </span>
+                                </div>
+
+                                <h3 class="text-xl font-bold mb-3" style="color: #003E7E;">
+                                    {{ $post->title }}
+                                </h3>
+
+                                <p class="text-gray-600 mb-4">
+                                    {{ $post->excerpt ?? Str::limit(strip_tags($post->content), 100) }}
+                                </p>
+
+                                <a href="{{ route('blog.show', $post->slug) }}"
+                                    class="inline-flex items-center font-semibold" style="color: #003E7E;">
+                                    Read More
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="{{ route('blog.index') }}"
+                        class="inline-block px-10 py-4 rounded-lg font-semibold text-white hover:opacity-90 transition shadow-lg"
+                        style="background-color: #003E7E;">
+                        View All News
+                    </a>
+                </div>
+            @endif
         </div>
     </section>
 

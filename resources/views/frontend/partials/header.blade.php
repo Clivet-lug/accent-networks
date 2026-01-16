@@ -17,7 +17,7 @@
                 {{-- Services Dropdown --}}
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open"
-                        class="text-accent-gray-dark hover:text-accent-blue transition flex items-center">
+                        class="text-gray-700 hover:text-[#003E7E] transition flex items-center">
                         Services
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -26,21 +26,22 @@
                     </button>
                     <div x-show="open" @click.outside="open = false" x-transition
                         class="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 z-50">
-                        <a href="{{ route('services.3cx-phone-systems') }}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">3CX
-                            Phone Systems</a>
-                        <a href="{{ route('services.lan-wan-solutions') }}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">LAN
-                            and WAN Solutions</a>
-                        <a href="{{ route('services.telephone-management') }}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">Telephone
-                            Management</a>
-                        <a href="{{ route('services.consultancy-services') }}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">Consultancy
-                            Services</a>
-                        <a href="{{ route('services.ict-solutions') }}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">ICT
-                            Solutions</a>
+                        <a href="{{ route('services.index') }}"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">
+                            All Services
+                        </a>
+                        <hr class="my-2">
+
+                        @php
+                            $navServices = \App\Models\Service::active()->ordered()->get();
+                        @endphp
+
+                        @foreach ($navServices as $navService)
+                            <a href="{{ route('services.show', $navService->slug) }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">
+                                {{ $navService->name }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
 
