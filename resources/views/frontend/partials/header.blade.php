@@ -10,9 +10,8 @@
 
             {{-- Desktop Navigation --}}
             <div class="hidden md:flex items-center space-x-8">
-                <a href="{{ route('home') }}" class="text-accent-gray-dark hover:text-accent-blue transition">Home</a>
-                <a href="{{ route('about') }}" class="text-accent-gray-dark hover:text-accent-blue transition">About
-                    Us</a>
+                <a href="{{ route('home') }}" class="text-gray-700 hover:text-[#003E7E] transition">Home</a>
+                <a href="{{ route('about') }}" class="text-gray-700 hover:text-[#003E7E] transition">About Us</a>
 
                 {{-- Services Dropdown --}}
                 <div class="relative" x-data="{ open: false }">
@@ -46,18 +45,19 @@
                 </div>
 
                 <a href="{{ route('projects.index') }}"
-                    class="text-accent-gray-dark hover:text-accent-blue transition">Projects</a>
-                <a href="{{ route('clients.index') }}"
-                    class="text-accent-gray-dark hover:text-accent-blue transition">Our Clients</a>
-                <a href="{{ route('blog.index') }}"
-                    class="text-accent-gray-dark hover:text-accent-blue transition">News</a>
+                    class="text-gray-700 hover:text-[#003E7E] transition">Projects</a>
+                <a href="{{ route('clients.index') }}" class="text-gray-700 hover:text-[#003E7E] transition">Our
+                    Clients</a>
+                <a href="{{ route('blog.index') }}" class="text-gray-700 hover:text-[#003E7E] transition">News</a>
                 <a href="{{ route('contact.index') }}"
-                    class="bg-accent-blue text-white px-6 py-2 rounded-lg hover:bg-accent-blue-light transition">Contact
-                    Us</a>
+                    class="text-white px-6 py-2 rounded-lg hover:opacity-90 transition"
+                    style="background-color: #003E7E;">
+                    Contact Us
+                </a>
             </div>
 
             {{-- Mobile Menu Button --}}
-            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-accent-gray-dark">
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-gray-700">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4 6h16M4 12h16M4 18h16"></path>
@@ -68,22 +68,32 @@
         </div>
 
         {{-- Mobile Menu --}}
-        <div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 pb-4">
-            <a href="{{ route('services.3cx-phone-systems') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">3CX Phone
-                Systems</a>
-            <a href="{{ route('services.lan-wan-solutions') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">LAN and WAN
-                Solutions</a>
-            <a href="{{ route('services.telephone-management') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">Telephone
-                Management</a>
-            <a href="{{ route('services.consultancy-services') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">Consultancy
-                Services</a>
-            <a href="{{ route('services.ict-solutions') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#003E7E] hover:text-white transition">ICT
-                Solutions</a>
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 pb-4 space-y-2">
+            <a href="{{ route('home') }}" class="block py-2 text-gray-700 hover:text-[#003E7E] transition">Home</a>
+            <a href="{{ route('about') }}" class="block py-2 text-gray-700 hover:text-[#003E7E] transition">About
+                Us</a>
+
+            {{-- Services in Mobile --}}
+            <div class="pl-4 space-y-2 border-l-2 border-gray-200">
+                <p class="font-semibold text-gray-900">Services:</p>
+                <a href="{{ route('services.index') }}"
+                    class="block py-1 text-sm text-gray-600 hover:text-[#003E7E] transition">All Services</a>
+                @foreach ($navServices as $navService)
+                    <a href="{{ route('services.show', $navService->slug) }}"
+                        class="block py-1 text-sm text-gray-600 hover:text-[#003E7E] transition">{{ $navService->name }}</a>
+                @endforeach
+            </div>
+
+            <a href="{{ route('projects.index') }}"
+                class="block py-2 text-gray-700 hover:text-[#003E7E] transition">Projects</a>
+            <a href="{{ route('clients.index') }}" class="block py-2 text-gray-700 hover:text-[#003E7E] transition">Our
+                Clients</a>
+            <a href="{{ route('blog.index') }}"
+                class="block py-2 text-gray-700 hover:text-[#003E7E] transition">News</a>
+            <a href="{{ route('contact.index') }}" class="block py-2 px-4 text-center text-white rounded-lg mt-2"
+                style="background-color: #003E7E;">
+                Contact Us
+            </a>
         </div>
     </nav>
 </header>
