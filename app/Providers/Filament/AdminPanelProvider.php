@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->colors([
                 'primary' => Color::hex('#003E7E'), // Accent Networks Primary Blue
+                'info' => Color::hex('#5FA9DD'), // Light Blue
             ])
             ->brandName('Accent Networks')
             ->brandLogo(asset('images/logo.jpg'))
@@ -42,6 +43,9 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
+                \App\Filament\Widgets\StatsOverviewWidget::class,
+                \App\Filament\Widgets\LatestBlogPostsWidget::class,
+                \App\Filament\Widgets\LatestProjectsWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
