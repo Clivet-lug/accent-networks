@@ -12,7 +12,7 @@ use Filament\Support\Colors\Color;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\VerifyCSRFToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
@@ -26,22 +26,14 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->brandName('Accent Networks') // ADD THIS
             ->login()
             ->colors([
-                'primary' => [
-                    50 => '#e6f0f9',
-                    100 => '#b3d4ed',
-                    200 => '#80b8e1',
-                    300 => '#4d9cd5',
-                    400 => '#268ac9',
-                    500 => '#003E7E', // Accent Networks Primary Blue
-                    600 => '#003570',
-                    700 => '#002b60',
-                    800 => '#002150',
-                    900 => '#001740',
-                ],
+                'primary' => Color::hex('#003E7E'), // Accent Networks Primary Blue
             ])
+            ->brandName('Accent Networks')
+            ->brandLogo(asset('images/logo.jpg'))
+            ->brandLogoHeight('3rem')
+            ->favicon(asset('favicon.ico'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -50,7 +42,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -58,7 +49,7 @@ class AdminPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
+                VerifyCSRFToken::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
