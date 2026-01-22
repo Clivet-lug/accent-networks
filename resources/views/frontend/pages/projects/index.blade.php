@@ -1,28 +1,30 @@
 @extends('frontend.layouts.app')
-
 @section('title', 'Our Projects - Accent Networks')
 
 @section('content')
 
     {{-- Hero --}}
-    <section class="bg-gradient-to-br from-accent-blue to-accent-blue-light text-white py-20">
+    <section class="py-20" style="background-color: #003E7E;">
         <div class="container mx-auto px-4 text-center">
-            <h1 class="text-5xl font-bold mb-4">Our Projects</h1>
-            <p class="text-xl">Showcasing our expertise through successful implementations</p>
+            <h1 class="text-5xl font-bold text-white mb-4">Our Projects</h1>
+            <div class="w-24 h-1 bg-white mx-auto mb-4"></div>
+            <p class="text-xl text-white">Showcasing our expertise through successful implementations</p>
         </div>
     </section>
 
     {{-- Filter Section --}}
-    <section class="py-8 bg-gray-50">
+    <section class="py-8" style="background-color: #f8f9fa;">
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap gap-4 justify-center">
                 <a href="{{ route('projects.index') }}"
-                    class="px-6 py-3 rounded-lg {{ !request('category') ? 'bg-accent-blue text-white' : 'bg-white text-accent-gray-dark hover:bg-gray-100' }} transition font-semibold">
+                    class="px-6 py-3 rounded-lg font-semibold transition {{ !request('category') ? 'text-white' : 'bg-white text-gray-700 hover:bg-gray-100' }}"
+                    style="{{ !request('category') ? 'background-color: #003E7E;' : '' }}">
                     All Projects
                 </a>
                 @foreach ($categories as $cat)
                     <a href="{{ route('projects.index', ['category' => $cat->slug]) }}"
-                        class="px-6 py-3 rounded-lg {{ request('category') == $cat->slug ? 'bg-accent-blue text-white' : 'bg-white text-accent-gray-dark hover:bg-gray-100' }} transition font-semibold">
+                        class="px-6 py-3 rounded-lg font-semibold transition {{ request('category') == $cat->slug ? 'text-white' : 'bg-white text-gray-700 hover:bg-gray-100' }}"
+                        style="{{ request('category') == $cat->slug ? 'background-color: #003E7E;' : '' }}">
                         {{ $cat->name }}
                     </a>
                 @endforeach
@@ -31,32 +33,44 @@
     </section>
 
     {{-- Projects Grid --}}
-    <section class="py-20">
+    <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
             @if ($projects->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach ($projects as $project)
-                        <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all">
-                            {{-- Project Image with Gradient --}}
-                            <div
-                                class="aspect-video bg-gradient-to-br from-accent-blue via-purple-500 to-accent-blue-light relative">
+                        <div
+                            class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all h-96">
+
+                            {{-- Background --}}
+                            <div class="absolute inset-0 w-full h-full" style="background-color: #003E7E;">
                                 <div
-                                    class="absolute inset-0 flex items-center justify-center text-white text-6xl font-bold opacity-30">
+                                    class="absolute inset-0 flex items-center justify-center text-white text-8xl font-bold opacity-10">
                                     {{ strtoupper(substr($project->title, 0, 1)) }}
                                 </div>
                             </div>
 
-                            {{-- Project Info Overlay --}}
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6 text-white">
-                                <span class="text-sm font-semibold mb-2 text-accent-blue-light">
-                                    {{ $project->category->name ?? 'Uncategorized' }} • {{ $project->year }}
-                                </span>
-                                <h3 class="text-xl font-bold mb-2">{{ $project->title }}</h3>
-                                <p class="text-sm text-white/90 mb-4 line-clamp-2">
-                                    {{ Str::limit($project->description, 100) }}</p>
+                            {{-- Overlay --}}
+                            <div class="absolute inset-0 group-hover:opacity-80 transition-opacity duration-300"
+                                style="background-color: #003E7E;"></div>
+
+                            {{-- Content --}}
+                            <div class="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
+
+                                @if ($project->category)
+                                    <span
+                                        class="inline-block self-start px-4 py-1 mb-3 text-xs font-semibold rounded-full border border-white/30"
+                                        style="background-color: rgba(95, 169, 221, 0.3);">
+                                        {{ $project->category->name }}
+                                    </span>
+                                @endif
+
+                                <h3 class="text-2xl font-bold mb-2">{{ $project->title }}</h3>
+                                <p class="text-sm mb-4 opacity-0 group-hover:opacity-100 transition">
+                                    {{ Str::limit($project->description, 100) }}
+                                </p>
+
                                 <a href="{{ route('projects.show', $project->slug) }}"
-                                    class="inline-flex items-center text-white font-semibold group-hover:text-accent-blue-light transition">
+                                    class="inline-flex items-center font-semibold opacity-0 group-hover:opacity-100 transition">
                                     View Project
                                     <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,7 +89,8 @@
                 </div>
             @else
                 <div class="text-center py-12">
-                    <p class="text-gray-500 text-lg">No projects found in this category.</p>
+                    <p class="text-gray-500 text-lg">No projects found{{ request('category') ? ' in this category' : '' }}.
+                    </p>
                 </div>
             @endif
         </div>

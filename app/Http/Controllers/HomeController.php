@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\Client;
 use App\Models\Testimonial;
 use App\Models\HeroSection;
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -47,12 +48,19 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
+        // Get latest blog posts for news section (limit to 3)
+        $latestPosts = BlogPost::published()
+            ->latest('published_at')
+            ->take(3)
+            ->get();
+
         return view('frontend.pages.home', compact(
             'hero',
             'services',
             'projects',
             'clients',
-            'testimonials'
+            'testimonials',
+            'latestPosts'
         ));
     }
 }
