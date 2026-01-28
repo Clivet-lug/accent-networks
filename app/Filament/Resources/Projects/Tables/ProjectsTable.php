@@ -31,9 +31,9 @@ class ProjectsTable
                 TextColumn::make('category_id')
                     ->numeric()
                     ->sortable(),
-                ImageColumn::make('featured_image'),
-                ImageColumn::make('before_image'),
-                ImageColumn::make('after_image'),
+                // ImageColumn::make('featured_image'),
+                // ImageColumn::make('before_image'),
+                // ImageColumn::make('after_image'),
                 IconColumn::make('is_featured')
                     ->boolean(),
                 IconColumn::make('is_published')
