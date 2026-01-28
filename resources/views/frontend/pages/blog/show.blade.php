@@ -72,11 +72,16 @@
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
 
-                {{-- Featured Image Placeholder --}}
+                {{-- Featured Image --}}
                 @if ($blogPost->featured_image)
-                    <div
-                        class="aspect-video bg-gradient-to-br from-accent-blue to-accent-blue-light rounded-xl mb-12 flex items-center justify-center text-white text-6xl font-bold opacity-20">
-                        {{ strtoupper(substr($blogPost->title, 0, 1)) }}
+                    @php
+                        // Handle both old and new image paths
+                        $imagePath = file_exists(public_path('storage/' . $blogPost->featured_image))
+                            ? asset('storage/' . $blogPost->featured_image)
+                            : asset('storage/blog-images/' . $blogPost->featured_image);
+                    @endphp
+                    <div class="aspect-video rounded-xl mb-12 overflow-hidden">
+                        <img src="{{ $imagePath }}" alt="{{ $blogPost->title }}" class="w-full h-full object-cover">
                     </div>
                 @endif
 
@@ -86,17 +91,30 @@
                 </div>
 
                 {{-- Tags --}}
-                @if ($blogPost->tags && count($blogPost->tags) > 0)
-                    <div class="mt-12 pt-8 border-t">
-                        <h3 class="text-lg font-semibold mb-4">Tags:</h3>
-                        <div class="flex flex-wrap gap-2">
-                            @foreach ($blogPost->tags as $tag)
-                                <span class="bg-gray-100 text-accent-gray-dark px-4 py-2 rounded-full text-sm">
-                                    {{ $tag }}
-                                </span>
-                            @endforeach
+                @if ($blogPost->tags)
+                    @php
+                        // Handle both string and array formats
+                        $tagsArray = is_array($blogPost->tags)
+                            ? $blogPost->tags
+                            : array_filter(
+                                array_map('trim', explode(',', str_replace(['"', '[', ']'], '', $blogPost->tags))),
+                            );
+                    @endphp
+
+                    @if (count($tagsArray) > 0)
+                        <div class="mt-12 pt-8 border-t">
+                            <h3 class="text-lg font-semibold mb-4">Tags:</h3>
+                            <div class="flex flex-wrap gap-2">
+                                @foreach ($tagsArray as $tag)
+                                    @if (trim($tag))
+                                        <span class="bg-gray-100 text-accent-gray-dark px-4 py-2 rounded-full text-sm">
+                                            {{ trim($tag) }}
+                                        </span>
+                                    @endif
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endif
 
                 {{-- Share Section --}}
@@ -135,17 +153,45 @@
     @if ($relatedPosts->count() > 0)
         <section class="py-20 bg-gray-50">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12">Related Articles</h2>
+                <h2 class="text-3xl font-bold text-center mb-12" style="color: #003E7E;">Related Articles</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     @foreach ($relatedPosts as $post)
                         <a href="{{ route('blog.show', $post->slug) }}"
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-                            <div class="aspect-video bg-gradient-to-br from-accent-blue to-accent-blue-light"></div>
+                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2">
+
+                            {{-- Featured Image --}}
+                            <div class="aspect-video relative overflow-hidden">
+                                @if ($post->featured_image)
+                                    @php
+                                        // Handle both old and new image paths
+                                        $imagePath = file_exists(public_path('storage/' . $post->featured_image))
+                                            ? asset('storage/' . $post->featured_image)
+                                            : asset('storage/blog-images/' . $post->featured_image);
+                                    @endphp
+                                    <img src="{{ $imagePath }}" alt="{{ $post->title }}"
+                                        class="w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center text-white text-4xl font-bold opacity-20"
+                                        style="background: linear-gradient(135deg, #003E7E 0%, #5FA9DD 100%);">
+                                        {{ strtoupper(substr($post->title, 0, 1)) }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            {{-- Post Content --}}
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-accent-gray-dark mb-2 line-clamp-2">{{ $post->title }}
+                                <h3 class="text-xl font-bold mb-2 line-clamp-2" style="color: #3F3F3F;">
+                                    {{ $post->title }}
                                 </h3>
-                                <p class="text-sm text-accent-gray-medium">{{ $post->published_at->format('M d, Y') }}</p>
+                                <p class="text-sm flex items-center" style="color: #6E7173;">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    {{ $post->published_at->format('M d, Y') }}
+                                </p>
                             </div>
                         </a>
                     @endforeach

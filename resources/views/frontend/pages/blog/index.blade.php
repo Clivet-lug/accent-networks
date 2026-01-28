@@ -62,12 +62,26 @@
                         <article
                             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2">
 
-                            {{-- Featured Image Placeholder --}}
-                            <div class="aspect-video bg-gradient-to-br from-accent-blue to-accent-blue-light relative">
-                                <div
-                                    class="absolute inset-0 flex items-center justify-center text-white text-4xl font-bold opacity-20">
-                                    {{ strtoupper(substr($post->title, 0, 1)) }}
-                                </div>
+                            {{-- Featured Image --}}
+                            <div class="aspect-video relative overflow-hidden">
+                                @if ($post->featured_image)
+                                    @php
+                                        // Handle both old and new image paths
+                                        $imagePath = file_exists(public_path('storage/' . $post->featured_image))
+                                            ? asset('storage/' . $post->featured_image)
+                                            : asset('storage/blog-images/' . $post->featured_image);
+                                    @endphp
+                                    <img src="{{ $imagePath }}" alt="{{ $post->title }}"
+                                        class="w-full h-full object-cover">
+                                @else
+                                    <div
+                                        class="w-full h-full bg-gradient-to-br from-accent-blue to-accent-blue-light relative">
+                                        <div
+                                            class="absolute inset-0 flex items-center justify-center text-white text-4xl font-bold opacity-20">
+                                            {{ strtoupper(substr($post->title, 0, 1)) }}
+                                        </div>
+                                    </div>
+                                @endif
 
                                 {{-- Category Badge --}}
                                 @if ($post->category)
