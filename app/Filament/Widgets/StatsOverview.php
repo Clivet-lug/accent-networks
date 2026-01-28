@@ -9,7 +9,7 @@ use App\Models\Service;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
-class StatsOverviewWidget extends BaseWidget
+class StatsOverview extends BaseWidget
 {
     protected static ?int $sort = 1;
 

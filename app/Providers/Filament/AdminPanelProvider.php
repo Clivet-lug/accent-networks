@@ -12,11 +12,11 @@ use Filament\Support\Colors\Color;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCSRFToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -43,9 +43,9 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                \App\Filament\Widgets\StatsOverviewWidget::class,
-                \App\Filament\Widgets\LatestBlogPostsWidget::class,
-                \App\Filament\Widgets\LatestProjectsWidget::class,
+                //\App\Filament\Widgets\StatsOverview::class,
+                ///\App\Filament\Widgets\LatestBlogPostsWidget::class,
+                //\App\Filament\Widgets\LatestProjectsWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -53,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCSRFToken::class,
+		VerifyCsrfToken::class,                
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
