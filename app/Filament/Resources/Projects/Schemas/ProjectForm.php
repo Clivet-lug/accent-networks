@@ -27,11 +27,14 @@ class ProjectForm
                 TextInput::make('category_id')
                     ->numeric(),
                 FileUpload::make('featured_image')
-                    ->image(),
+                    ->image()
+                    ->disk('public'),
                 FileUpload::make('before_image')
-                    ->image(),
+                    ->image()
+                    ->disk('public'),
                 FileUpload::make('after_image')
-                    ->image(),
+                    ->image()
+                    ->disk('public'),
                 Textarea::make('scope')
                     ->columnSpanFull(),
                 Textarea::make('technologies')

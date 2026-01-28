@@ -21,6 +21,7 @@ class ClientForm
                 // LOGO UPLOAD
                 FileUpload::make('logo')
                     ->image()
+                    ->disk('public')
                     ->directory('clients')
                     ->maxSize(2048)
                     ->imageEditor()

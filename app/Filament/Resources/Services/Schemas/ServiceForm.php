@@ -26,7 +26,8 @@ class ServiceForm
                 TextInput::make('content_sections'),
                 TextInput::make('icon'),
                 FileUpload::make('featured_image')
-                    ->image(),
+                    ->image()
+                    ->disk('public'),
                 TextInput::make('cta_text')
                     ->required()
                     ->default('Get a Quote'),
