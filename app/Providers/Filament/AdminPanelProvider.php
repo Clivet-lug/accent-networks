@@ -43,9 +43,9 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                //\App\Filament\Widgets\StatsOverview::class,
-                ///\App\Filament\Widgets\LatestBlogPostsWidget::class,
-                //\App\Filament\Widgets\LatestProjectsWidget::class,
+                \App\Filament\Widgets\StatsOverview::class,
+                \App\Filament\Widgets\LatestBlogPostsWidget::class,
+                \App\Filament\Widgets\LatestProjectsWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -53,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-		VerifyCsrfToken::class,                
+                VerifyCsrfToken::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,

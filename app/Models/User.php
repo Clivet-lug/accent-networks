@@ -50,12 +50,8 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
-//	class User extends Authenticatable implements FilamentUser
-//{
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
     }
 }
-
-//}
