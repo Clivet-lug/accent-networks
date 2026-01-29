@@ -503,8 +503,10 @@
                             <div class="aspect-video relative overflow-hidden">
                                 @if ($post->featured_image)
                                     @php
-                                        // Handle both old and new image paths
-                                        $imagePath = file_exists(public_path('storage/' . $post->featured_image))
+                                        // Handle both formats:
+                                        // Format 1: "blog-images/filename.webp" (new - Filament saves full path)
+                                        // Format 2: "filename.webp" (old - just filename)
+                                        $imagePath = str_contains($post->featured_image, 'blog-images/')
                                             ? asset('storage/' . $post->featured_image)
                                             : asset('storage/blog-images/' . $post->featured_image);
                                     @endphp

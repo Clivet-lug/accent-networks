@@ -74,13 +74,15 @@
 
                 {{-- Featured Image --}}
                 @if ($blogPost->featured_image)
-                    @php
-                        // Handle both old and new image paths
-                        $imagePath = file_exists(public_path('storage/' . $blogPost->featured_image))
-                            ? asset('storage/' . $blogPost->featured_image)
-                            : asset('storage/blog-images/' . $blogPost->featured_image);
-                    @endphp
                     <div class="aspect-video rounded-xl mb-12 overflow-hidden">
+                        @php
+                            // Handle both formats:
+                            // Format 1: "blog-images/filename.webp" (new - Filament saves full path)
+                            // Format 2: "filename.webp" (old - just filename)
+                            $imagePath = str_contains($blogPost->featured_image, 'blog-images/')
+                                ? asset('storage/' . $blogPost->featured_image)
+                                : asset('storage/blog-images/' . $blogPost->featured_image);
+                        @endphp
                         <img src="{{ $imagePath }}" alt="{{ $blogPost->title }}" class="w-full h-full object-cover">
                     </div>
                 @endif
@@ -156,25 +158,25 @@
                 <h2 class="text-3xl font-bold text-center mb-12" style="color: #003E7E;">Related Articles</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    @foreach ($relatedPosts as $post)
-                        <a href="{{ route('blog.show', $post->slug) }}"
+                    @foreach ($relatedPosts as $relatedPost)
+                        <a href="{{ route('blog.show', $relatedPost->slug) }}"
                             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2">
 
                             {{-- Featured Image --}}
                             <div class="aspect-video relative overflow-hidden">
-                                @if ($post->featured_image)
+                                @if ($relatedPost->featured_image)
                                     @php
-                                        // Handle both old and new image paths
-                                        $imagePath = file_exists(public_path('storage/' . $post->featured_image))
-                                            ? asset('storage/' . $post->featured_image)
-                                            : asset('storage/blog-images/' . $post->featured_image);
+                                        // Handle both formats
+                                        $imagePath = str_contains($relatedPost->featured_image, 'blog-images/')
+                                            ? asset('storage/' . $relatedPost->featured_image)
+                                            : asset('storage/blog-images/' . $relatedPost->featured_image);
                                     @endphp
-                                    <img src="{{ $imagePath }}" alt="{{ $post->title }}"
+                                    <img src="{{ $imagePath }}" alt="{{ $relatedPost->title }}"
                                         class="w-full h-full object-cover">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center text-white text-4xl font-bold opacity-20"
                                         style="background: linear-gradient(135deg, #003E7E 0%, #5FA9DD 100%);">
-                                        {{ strtoupper(substr($post->title, 0, 1)) }}
+                                        {{ strtoupper(substr($relatedPost->title, 0, 1)) }}
                                     </div>
                                 @endif
                             </div>
@@ -182,7 +184,7 @@
                             {{-- Post Content --}}
                             <div class="p-6">
                                 <h3 class="text-xl font-bold mb-2 line-clamp-2" style="color: #3F3F3F;">
-                                    {{ $post->title }}
+                                    {{ $relatedPost->title }}
                                 </h3>
                                 <p class="text-sm flex items-center" style="color: #6E7173;">
                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -190,7 +192,7 @@
                                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                                         </path>
                                     </svg>
-                                    {{ $post->published_at->format('M d, Y') }}
+                                    {{ $relatedPost->published_at->format('M d, Y') }}
                                 </p>
                             </div>
                         </a>
