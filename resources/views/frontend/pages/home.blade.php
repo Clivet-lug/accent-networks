@@ -367,15 +367,29 @@
                         @foreach ($clients->chunk(4) as $chunk)
                             <div class="flex-shrink-0 w-full grid grid-cols-2 md:grid-cols-4 gap-8 px-4">
                                 @foreach ($chunk as $client)
-                                    <div
-                                        class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 grayscale hover:grayscale-0 flex items-center justify-center">
-                                        @if ($client->logo)
-                                            <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}"
-                                                class="max-h-20 w-auto mx-auto">
-                                        @else
-                                            <p class="text-center font-bold text-gray-700">{{ $client->name }}</p>
-                                        @endif
-                                    </div>
+                                    @if ($client->website_url)
+                                        {{-- Clickable Logo --}}
+                                        <a href="{{ $client->website_url }}" target="_blank" rel="noopener noreferrer"
+                                            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 flex items-center justify-center group">
+                                            @if ($client->logo)
+                                                <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}"
+                                                    class="max-h-20 w-auto mx-auto transition-transform group-hover:scale-110">
+                                            @else
+                                                <p class="text-center font-bold text-gray-700">{{ $client->name }}</p>
+                                            @endif
+                                        </a>
+                                    @else
+                                        {{-- Non-clickable Logo --}}
+                                        <div
+                                            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 flex items-center justify-center group">
+                                            @if ($client->logo)
+                                                <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}"
+                                                    class="max-h-20 w-auto mx-auto transition-transform group-hover:scale-110">
+                                            @else
+                                                <p class="text-center font-bold text-gray-700">{{ $client->name }}</p>
+                                            @endif
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         @endforeach
