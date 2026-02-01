@@ -268,17 +268,30 @@
                     <div
                         class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 h-96">
 
-                        {{-- Project Image/Background --}}
-                        <div class="absolute inset-0 w-full h-full" style="background-color: #003E7E;">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center text-white text-8xl font-bold opacity-10">
-                                {{ strtoupper(substr($project->title, 0, 1)) }}
+                        {{-- Featured Image or Background --}}
+                        @if ($project->featured_image)
+                            @php
+                                // Handle both path formats
+                                $imagePath = str_contains($project->featured_image, 'project-images/')
+                                    ? asset('storage/' . $project->featured_image)
+                                    : asset('storage/project-images/' . $project->featured_image);
+                            @endphp
+                            <img src="{{ $imagePath }}" alt="{{ $project->title }}"
+                                class="absolute inset-0 w-full h-full object-cover">
+                        @else
+                            {{-- Fallback background with letter --}}
+                            <div class="absolute inset-0 w-full h-full" style="background-color: #003E7E;">
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center text-white text-8xl font-bold opacity-10">
+                                    {{ strtoupper(substr($project->title, 0, 1)) }}
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
-                        {{-- Blue overlay becomes lighter on hover --}}
-                        <div class="absolute inset-0 group-hover:opacity-80 transition-opacity duration-300"
-                            style="background-color: #003E7E;"></div>
+                        {{-- Dark overlay that lightens on hover --}}
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/60 transition-all duration-300">
+                        </div>
 
                         {{-- Content --}}
                         <div class="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">

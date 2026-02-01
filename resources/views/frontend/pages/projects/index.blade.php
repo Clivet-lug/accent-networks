@@ -41,17 +41,29 @@
                         <div
                             class="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all h-96">
 
-                            {{-- Background --}}
-                            <div class="absolute inset-0 w-full h-full" style="background-color: #003E7E;">
-                                <div
-                                    class="absolute inset-0 flex items-center justify-center text-white text-8xl font-bold opacity-10">
-                                    {{ strtoupper(substr($project->title, 0, 1)) }}
+                            {{-- Featured Image or Background --}}
+                            @if ($project->featured_image)
+                                @php
+                                    // Handle both path formats
+                                    $imagePath = str_contains($project->featured_image, 'project-images/')
+                                        ? asset('storage/' . $project->featured_image)
+                                        : asset('storage/project-images/' . $project->featured_image);
+                                @endphp
+                                <img src="{{ $imagePath }}"
+                                     alt="{{ $project->title }}"
+                                     class="absolute inset-0 w-full h-full object-cover">
+                            @else
+                                {{-- Fallback background with letter --}}
+                                <div class="absolute inset-0 w-full h-full" style="background-color: #003E7E;">
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center text-white text-8xl font-bold opacity-10">
+                                        {{ strtoupper(substr($project->title, 0, 1)) }}
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
 
-                            {{-- Overlay --}}
-                            <div class="absolute inset-0 group-hover:opacity-80 transition-opacity duration-300"
-                                style="background-color: #003E7E;"></div>
+                            {{-- Dark overlay that lightens on hover --}}
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/60 transition-all duration-300"></div>
 
                             {{-- Content --}}
                             <div class="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
@@ -65,12 +77,13 @@
                                 @endif
 
                                 <h3 class="text-2xl font-bold mb-2">{{ $project->title }}</h3>
-                                <p class="text-sm mb-4 opacity-0 group-hover:opacity-100 transition">
+
+                                <p class="text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     {{ Str::limit($project->description, 100) }}
                                 </p>
 
                                 <a href="{{ route('projects.show', $project->slug) }}"
-                                    class="inline-flex items-center font-semibold opacity-0 group-hover:opacity-100 transition">
+                                    class="inline-flex items-center font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     View Project
                                     <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
