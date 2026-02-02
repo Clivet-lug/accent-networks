@@ -25,6 +25,9 @@ class Service extends Model implements HasMedia
         'content_sections',
         'icon',
         'featured_image',
+        'gallery_images',      // NEW: Array of gallery images
+        'before_image',        // NEW: Before image
+        'after_image',         // NEW: After image
         'cta_text',
         'cta_link',
         'is_active',
@@ -35,7 +38,8 @@ class Service extends Model implements HasMedia
      * The attributes that should be cast.
      */
     protected $casts = [
-        'content_sections' => 'array', // Store as JSON
+        'content_sections' => 'array',
+        'gallery_images' => 'array',   // NEW: Cast to array
         'is_active' => 'boolean',
         'order' => 'integer',
     ];
