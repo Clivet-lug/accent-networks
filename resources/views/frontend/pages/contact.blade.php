@@ -3,12 +3,15 @@
 
 @section('content')
 
-    {{-- Hero Section with Gradient --}}
-    <section class="relative py-32 overflow-hidden" style="background: linear-gradient(135deg, #003E7E 0%, #5FA9DD 100%);">
-        <div class="absolute inset-0 opacity-10">
+    {{-- Hero Section with Background Image --}}
+    <section class="relative py-32 overflow-hidden">
+        <div class="absolute inset-0">
+            @if (file_exists(public_path('images/contact/hero.jpg')))
+                <img src="{{ asset('images/contact/hero.jpg') }}" alt="Contact Accent Networks"
+                    class="w-full h-full object-cover">
+            @endif
             <div class="absolute inset-0"
-                style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
-            </div>
+                style="background: linear-gradient(135deg, rgba(0, 62, 126, 0.88) 0%, rgba(95, 169, 221, 0.78) 100%);"></div>
         </div>
 
         <div class="container mx-auto px-4 relative z-10">
