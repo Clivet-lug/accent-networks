@@ -6,7 +6,7 @@
     {{-- Hero Section with Background Image --}}
     <section class="relative py-32 overflow-hidden">
         <div class="absolute inset-0">
-            <img src="{{ asset('images/about/office-building.jpg') }}" alt="Accent Networks"
+            <img src="{{ asset('images/about/team1.png') }}" alt="Accent Networks"
                 class="w-full h-full object-cover">
             <div class="absolute inset-0"
                 style="background: linear-gradient(135deg, rgba(0, 62, 126, 0.88) 0%, rgba(95, 169, 221, 0.78) 100%);"></div>
