@@ -1,41 +1,43 @@
 <?php
 
-namespace App\Filament\Resources\Settings;
+namespace App\Filament\Resources\Services;
 
-use App\Filament\Resources\Settings\Pages\CreateSetting;
-use App\Filament\Resources\Settings\Pages\EditSetting;
-use App\Filament\Resources\Settings\Pages\ListSettings;
-use App\Filament\Resources\Settings\Schemas\SettingForm;
-use App\Filament\Resources\Settings\Tables\SettingsTable;
-use App\Models\Setting;
+use App\Filament\Resources\Services\Pages\CreateService;
+use App\Filament\Resources\Services\Pages\EditService;
+use App\Filament\Resources\Services\Pages\ListServices;
+use App\Filament\Resources\Services\Schemas\ServiceForm;
+use App\Filament\Resources\Services\Tables\ServicesTable;
+use App\Models\Service;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SettingResource extends Resource
+class ServiceResource extends Resource
 {
-    protected static ?string $model = Setting::class;
+    protected static ?string $model = Service::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-wrench-screwdriver';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationLabel = 'Settings';
+    protected static ?string $navigationLabel = 'Services';
 
-    protected static ?string $modelLabel = 'Setting';
+    protected static ?string $modelLabel = 'Service';
 
-    protected static ?string $pluralModelLabel = 'Settings';
+    protected static ?string $pluralModelLabel = 'Services';
 
     public static function form(Schema $schema): Schema
     {
-        return SettingForm::configure($schema);
+        return ServiceForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return SettingsTable::configure($table);
+        return ServicesTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -48,9 +50,19 @@ class SettingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListSettings::route('/'),
-            'create' => CreateSetting::route('/create'),
-            'edit' => EditSetting::route('/{record}/edit'),
+            'index' => ListServices::route('/'),
+            'create' => CreateService::route('/create'),
+            'edit' => EditService::route('/{record}/edit'),
         ];
     }
+
+    public static function getRecordRouteBindingEloquentQuery(): Builder
+    {
+        return parent::getRecordRouteBindingEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+
+
 }
