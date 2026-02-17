@@ -35,6 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(asset('images/logo.jpg'))
             ->brandLogoHeight('3rem')
             ->favicon(asset('favicon.ico'))
+            ->sidebarCollapsibleOnDesktop() // ✨ Enable collapsible sidebar
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

@@ -13,30 +13,41 @@ class StatsOverview extends BaseWidget
 {
     protected static ?int $sort = 1;
 
+    protected static bool $isLazy = true; // Enable lazy loading for better performance
+
+    protected int | string | array $columnSpan = 'full';
+
     protected function getStats(): array
     {
-        return [
-            Stat::make('Total Services', Service::count())
-                ->description('Active ICT services')
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
-                ->color('primary')
-                ->chart([7, 12, 15, 18, 21, Service::count()]),
+        $servicesCount = Service::where('is_active', true)->count();
+        $projectsCount = Project::count();
+        $clientsCount = Client::count();
+        $publishedPostsCount = BlogPost::where('is_published', true)->count();
 
-            Stat::make('Total Projects', Project::count())
-                ->description('Completed projects')
+        return [
+            Stat::make('Active ICT services', $servicesCount)
+                ->description('Services offered')
+                ->descriptionIcon('heroicon-m-wrench-screwdriver')
+                ->color('primary')
+                ->chart([3, 5, 7, 10, 12, $servicesCount]),
+
+            Stat::make('Completed projects', $projectsCount)
+                ->description('Successfully delivered')
                 ->descriptionIcon('heroicon-m-check-circle')
                 ->color('success')
-                ->chart([5, 10, 15, 20, 25, Project::count()]),
+                ->chart([2, 5, 10, 15, 20, $projectsCount]),
 
-            Stat::make('Total Clients', Client::count())
-                ->description('Trusted partners')
-                ->descriptionIcon('heroicon-m-users')
-                ->color('warning'),
+            Stat::make('Trusted partners', $clientsCount)
+                ->description('Active clients')
+                ->descriptionIcon('heroicon-m-building-office-2')
+                ->color('warning')
+                ->chart([5, 10, 15, 20, 25, $clientsCount]),
 
-            Stat::make('Blog Posts', BlogPost::where('is_published', true)->count())
-                ->description('Published articles')
+            Stat::make('Published articles', $publishedPostsCount)
+                ->description('Blog posts live')
                 ->descriptionIcon('heroicon-m-newspaper')
-                ->color('info'),
+                ->color('info')
+                ->chart([1, 3, 5, 8, 10, $publishedPostsCount]),
         ];
     }
 }

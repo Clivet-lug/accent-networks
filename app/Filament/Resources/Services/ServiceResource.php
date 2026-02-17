@@ -1,35 +1,41 @@
 <?php
 
-namespace App\Filament\Resources\Services;
+namespace App\Filament\Resources\Settings;
 
-use App\Filament\Resources\Services\Pages\CreateService;
-use App\Filament\Resources\Services\Pages\EditService;
-use App\Filament\Resources\Services\Pages\ListServices;
-use App\Filament\Resources\Services\Schemas\ServiceForm;
-use App\Filament\Resources\Services\Tables\ServicesTable;
-use App\Models\Service;
+use App\Filament\Resources\Settings\Pages\CreateSetting;
+use App\Filament\Resources\Settings\Pages\EditSetting;
+use App\Filament\Resources\Settings\Pages\ListSettings;
+use App\Filament\Resources\Settings\Schemas\SettingForm;
+use App\Filament\Resources\Settings\Tables\SettingsTable;
+use App\Models\Setting;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ServiceResource extends Resource
+class SettingResource extends Resource
 {
-    protected static ?string $model = Service::class;
+    protected static ?string $model = Setting::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
+
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $navigationLabel = 'Settings';
+
+    protected static ?string $modelLabel = 'Setting';
+
+    protected static ?string $pluralModelLabel = 'Settings';
 
     public static function form(Schema $schema): Schema
     {
-        return ServiceForm::configure($schema);
+        return SettingForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return ServicesTable::configure($table);
+        return SettingsTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -42,17 +48,9 @@ class ServiceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListServices::route('/'),
-            'create' => CreateService::route('/create'),
-            'edit' => EditService::route('/{record}/edit'),
+            'index' => ListSettings::route('/'),
+            'create' => CreateSetting::route('/create'),
+            'edit' => EditSetting::route('/{record}/edit'),
         ];
-    }
-
-    public static function getRecordRouteBindingEloquentQuery(): Builder
-    {
-        return parent::getRecordRouteBindingEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
     }
 }

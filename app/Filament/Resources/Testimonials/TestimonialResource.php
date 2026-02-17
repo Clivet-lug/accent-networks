@@ -20,7 +20,15 @@ class TestimonialResource extends Resource
 {
     protected static ?string $model = Testimonial::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-chat-bubble-left-right';
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationLabel = 'Testimonials';
+
+    protected static ?string $modelLabel = 'Testimonial';
+
+    protected static ?string $pluralModelLabel = 'Testimonials';
 
     public static function form(Schema $schema): Schema
     {
@@ -55,4 +63,6 @@ class TestimonialResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
+
 }

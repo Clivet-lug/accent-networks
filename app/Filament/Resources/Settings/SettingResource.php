@@ -18,7 +18,15 @@ class SettingResource extends Resource
 {
     protected static ?string $model = Setting::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
+
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $navigationLabel = 'Settings';
+
+    protected static ?string $modelLabel = 'Setting';
+
+    protected static ?string $pluralModelLabel = 'Settings';
 
     public static function form(Schema $schema): Schema
     {
