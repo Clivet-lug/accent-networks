@@ -215,7 +215,7 @@
                         All Services
                     </a>
 
-                    <a href="{{ route('services.3cx-phone-systems') }}"
+                    {{-- <a href="{{ route('services.3cx-phone-systems') }}"
                         class="block py-2 px-4 rounded-lg text-sm {{ request()->routeIs('services.3cx-phone-systems') ? 'text-[#003E7E] bg-blue-50' : 'text-gray-600 hover:bg-gray-50' }}">
                         3CX Phone Systems
                     </a>
@@ -238,7 +238,7 @@
                     <a href="{{ route('services.ict-solutions') }}"
                         class="block py-2 px-4 rounded-lg text-sm {{ request()->routeIs('services.ict-solutions') ? 'text-[#003E7E] bg-blue-50' : 'text-gray-600 hover:bg-gray-50' }}">
                         ICT Solutions
-                    </a>
+                    </a> --}}
 
                     @php
                         $navServices = \App\Models\Service::active()->ordered()->limit(5)->get();

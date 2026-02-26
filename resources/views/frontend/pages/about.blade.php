@@ -230,7 +230,7 @@
                         ['name' => 'Cisco', 'country' => 'USA', 'logo' => 'cisco.png'],
                         ['name' => 'MAN3000', 'country' => 'South Africa', 'logo' => 'man3000.png'],
                         ['name' => 'Unifi', 'country' => 'Zambia', 'logo' => 'unifi.png'],
-
+                        // ['name' => 'ajax', 'country' => 'Zambia', 'logo' => 'ajax.png'],
                     ];
                 @endphp
 
