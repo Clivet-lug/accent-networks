@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Services\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -37,10 +38,26 @@ class ServiceForm
                     ->helperText('Brief description for cards (max 200 chars)')
                     ->columnSpanFull(),
 
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->required()
-                    ->rows(5)
-                    ->helperText('Full service description')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'underline',
+                        'undo',
+                    ])
+                    ->helperText('Full service description — supports headings, bullets, tables, links')
                     ->columnSpanFull(),
 
                 // FEATURED IMAGE

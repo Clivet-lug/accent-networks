@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Projects\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -32,19 +33,56 @@ class ProjectForm
                     ->helperText('Auto-generated from title')
                     ->columnSpan(1),
 
-                Textarea::make('description')
+                RichEditor::make('description')
                     ->required()
-                    ->rows(4)
-                    ->helperText('Brief project description')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'strike',
+                        'h2',
+                        'h3',
+                        'bulletList',
+                        'orderedList',
+                        'blockquote',
+                        'link',
+                        'table',
+                        'undo',
+                        'redo',
+                    ])
+                    ->helperText('Full project description — supports headings, bullets, tables, links')
                     ->columnSpanFull(),
 
-                Textarea::make('scope')
-                    ->rows(3)
+                RichEditor::make('scope')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'strike',
+                        'h2',
+                        'h3',
+                        'bulletList',
+                        'orderedList',
+                        'blockquote',
+                        'link',
+                        'table',
+                        'undo',
+                        'redo',
+                    ])
                     ->helperText('Project scope and deliverables (optional)')
                     ->columnSpanFull(),
 
-                Textarea::make('technologies')
-                    ->rows(3)
+                RichEditor::make('technologies')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'bulletList',
+                        'orderedList',
+                        'link',
+                        'undo',
+                        'redo',
+                    ])
                     ->helperText('Technologies and tools used (optional)')
                     ->columnSpanFull(),
 
