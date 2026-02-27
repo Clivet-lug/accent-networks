@@ -85,7 +85,7 @@
                         <hr class="my-2 border-gray-200">
 
                         {{-- Static Service Pages --}}
-                        <a href="{{ route('services.3cx-phone-systems') }}"
+                        {{-- <a href="{{ route('services.3cx-phone-systems') }}"
                             class="block px-4 py-3 text-sm hover:bg-gray-50 transition {{ request()->routeIs('services.3cx-phone-systems') ? 'text-[#003E7E] bg-blue-50' : 'text-gray-700' }}">
                             3CX Phone Systems
                         </a>
@@ -108,7 +108,7 @@
                         <a href="{{ route('services.ict-solutions') }}"
                             class="block px-4 py-3 text-sm hover:bg-gray-50 transition {{ request()->routeIs('services.ict-solutions') ? 'text-[#003E7E] bg-blue-50' : 'text-gray-700' }}">
                             ICT Solutions
-                        </a>
+                        </a> --}}
 
                         {{-- Dynamic Services from Database --}}
                         @php
