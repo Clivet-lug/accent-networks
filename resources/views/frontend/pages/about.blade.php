@@ -226,7 +226,7 @@
                 @php
                     $partners = [
                         ['name' => 'Siemon', 'country' => 'USA', 'logo' => 'siemon.png'],
-                        ['name' => '3CX', 'country' => 'Cyprus', 'logo' => '3cx.png'],
+                        ['name' => '3CX', 'country' => 'Cyprus', 'logo' => '3CX.png'],
                         ['name' => 'Cisco', 'country' => 'USA', 'logo' => 'cisco.png'],
                         ['name' => 'MAN3000', 'country' => 'South Africa', 'logo' => 'man3000.png'],
                         ['name' => 'Unifi', 'country' => 'Zambia', 'logo' => 'unifi.png'],
