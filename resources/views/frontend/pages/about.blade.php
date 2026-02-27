@@ -222,7 +222,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-8 max-w-6xl mx-auto">
                 @php
                     $partners = [
                         ['name' => 'Siemon', 'country' => 'USA', 'logo' => 'siemon.png'],
@@ -230,7 +230,8 @@
                         ['name' => 'Cisco', 'country' => 'USA', 'logo' => 'cisco.png'],
                         ['name' => 'MAN3000', 'country' => 'South Africa', 'logo' => 'man3000.png'],
                         ['name' => 'Unifi', 'country' => 'Zambia', 'logo' => 'unifi.png'],
-                        // ['name' => 'ajax', 'country' => 'Zambia', 'logo' => 'ajax.png'],
+                        ['name' => 'Ajax', 'country' => 'Zambia', 'logo' => 'ajax.png'],
+                        ['name' => 'Globalsix', 'country' => 'Ukraine', 'logo' => 'global6.png'],
                     ];
                 @endphp
 
