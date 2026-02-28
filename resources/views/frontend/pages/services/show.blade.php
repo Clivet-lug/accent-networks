@@ -31,10 +31,8 @@
                     <span>/</span>
                     <span class="text-white">{{ $service->name }}</span>
                 </nav>
-
                 <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">{{ $service->name }}</h1>
                 <div class="w-20 h-1 mx-auto mb-6" style="background-color: #5FA9DD;"></div>
-
                 @if ($service->short_description)
                     <p class="text-lg md:text-xl text-white/85 max-w-2xl mx-auto leading-relaxed">
                         {{ $service->short_description }}
@@ -51,7 +49,7 @@
 
                 {{-- Main Description --}}
                 <div class="flex-1 min-w-0">
-                    <div class="service-content prose prose-lg max-w-none">
+                    <div class="service-content">
                         {!! $service->description !!}
                     </div>
                 </div>
@@ -93,11 +91,9 @@
                             <form action="{{ route('contact.submit') }}" method="POST" class="space-y-4">
                                 @csrf
                                 <input type="hidden" name="subject" value="Enquiry: {{ $service->name }}">
-
                                 <div>
                                     <input type="text" name="name" placeholder="Your Name" required
-                                        class="w-full px-4 py-2.5 rounded-lg text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:border-transparent"
-                                        style="focus-ring-color: #003E7E;">
+                                        class="w-full px-4 py-2.5 rounded-lg text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:border-transparent">
                                 </div>
                                 <div>
                                     <input type="email" name="email" placeholder="Email Address" required
@@ -130,36 +126,56 @@
         <section class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="max-w-6xl mx-auto">
-                    <h2 class="text-3xl font-bold text-center mb-12" style="color: #003E7E;">See The Difference</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-bold mb-3" style="color: #003E7E;">See The Difference</h2>
+                        <div class="w-16 h-1 mx-auto" style="background-color: #5FA9DD;"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         @if ($service->before_image)
-                            <div class="relative">
-                                <div class="absolute top-4 left-4 z-10">
-                                    <span
-                                        class="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold text-sm">Before</span>
-                                </div>
-                                @php
-                                    $beforePath = str_contains($service->before_image, 'service-images/')
-                                        ? asset('storage/' . $service->before_image)
-                                        : asset('storage/service-images/' . $service->before_image);
-                                @endphp
+                            @php
+                                $beforePath = str_contains($service->before_image, 'service-images/')
+                                    ? asset('storage/' . $service->before_image)
+                                    : asset('storage/service-images/' . $service->before_image);
+                            @endphp
+                            <div class="relative group overflow-hidden rounded-2xl shadow-xl">
                                 <img src="{{ $beforePath }}" alt="Before - {{ $service->name }}"
-                                    class="w-full h-80 object-cover rounded-xl shadow-xl">
+                                    class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0"
+                                    style="background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);"></div>
+                                <div class="absolute bottom-0 left-0 right-0 p-5">
+                                    <span
+                                        class="inline-flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                        Before
+                                    </span>
+                                </div>
                             </div>
                         @endif
                         @if ($service->after_image)
-                            <div class="relative">
-                                <div class="absolute top-4 left-4 z-10">
-                                    <span
-                                        class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold text-sm">After</span>
-                                </div>
-                                @php
-                                    $afterPath = str_contains($service->after_image, 'service-images/')
-                                        ? asset('storage/' . $service->after_image)
-                                        : asset('storage/service-images/' . $service->after_image);
-                                @endphp
+                            @php
+                                $afterPath = str_contains($service->after_image, 'service-images/')
+                                    ? asset('storage/' . $service->after_image)
+                                    : asset('storage/service-images/' . $service->after_image);
+                            @endphp
+                            <div class="relative group overflow-hidden rounded-2xl shadow-xl">
                                 <img src="{{ $afterPath }}" alt="After - {{ $service->name }}"
-                                    class="w-full h-80 object-cover rounded-xl shadow-xl">
+                                    class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0"
+                                    style="background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);">
+                                </div>
+                                <div class="absolute bottom-0 left-0 right-0 p-5">
+                                    <span
+                                        class="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        After
+                                    </span>
+                                </div>
                             </div>
                         @endif
                     </div>
@@ -173,23 +189,65 @@
         <section class="py-16 bg-white">
             <div class="container mx-auto px-4">
                 <div class="max-w-6xl mx-auto">
-                    <h2 class="text-3xl font-bold text-center mb-12" style="color: #003E7E;">Gallery</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        @foreach ($service->gallery_images as $galleryImage)
-                            @php
-                                $galleryPath = str_contains($galleryImage, 'service-images/')
-                                    ? asset('storage/' . $galleryImage)
-                                    : asset('storage/service-images/gallery/' . $galleryImage);
-                            @endphp
-                            <div
-                                class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all">
-                                <img src="{{ $galleryPath }}" alt="{{ $service->name }} Gallery"
-                                    class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                                </div>
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-bold mb-3" style="color: #003E7E;">Gallery</h2>
+                        <div class="w-16 h-1 mx-auto" style="background-color: #5FA9DD;"></div>
+                    </div>
+
+                    {{-- Carousel --}}
+                    <div class="relative" x-data="galleryCarousel()" x-init="init()">
+                        <div class="overflow-hidden rounded-2xl shadow-xl">
+                            <div class="flex transition-transform duration-500 ease-in-out"
+                                :style="'transform: translateX(-' + (current * 100 / visibleCount) + '%)'">
+                                @foreach ($service->gallery_images as $index => $galleryImage)
+                                    @php
+                                        $galleryPath = str_contains($galleryImage, 'service-images/')
+                                            ? asset('storage/' . $galleryImage)
+                                            : asset('storage/service-images/gallery/' . $galleryImage);
+                                    @endphp
+                                    <div class="flex-shrink-0 px-2" :style="'width: ' + (100 / visibleCount) + '%'">
+                                        <div class="relative group overflow-hidden rounded-xl" style="height: 160px;">
+                                            <img src="{{ $galleryPath }}"
+                                                alt="{{ $service->name }} Gallery {{ $index + 1 }}"
+                                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                                style="background: rgba(0, 62, 126, 0.3);"></div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                        @endforeach
+                        </div>
+
+                        {{-- Prev Button --}}
+                        <button @click="prev()"
+                            class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-11 h-11 rounded-full shadow-xl flex items-center justify-center transition hover:scale-110 z-10"
+                            style="background-color: #003E7E;">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+
+                        {{-- Next Button --}}
+                        <button @click="next()"
+                            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-11 h-11 rounded-full shadow-xl flex items-center justify-center transition hover:scale-110 z-10"
+                            style="background-color: #003E7E;">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+
+                        {{-- Dots --}}
+                        <div class="flex justify-center gap-2 mt-6">
+                            @foreach ($service->gallery_images as $index => $galleryImage)
+                                <button @click="goTo({{ $index }})"
+                                    class="transition-all duration-300 rounded-full"
+                                    :class="current === {{ $index }} ? 'w-6 h-2.5' :
+                                        'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400'"
+                                    :style="current === {{ $index }} ? 'background-color: #003E7E;' : ''">
+                                </button>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -202,6 +260,7 @@
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold mb-3" style="color: #003E7E;">Why Choose Accent Networks?</h2>
+                    <div class="w-16 h-1 mx-auto mb-4" style="background-color: #5FA9DD;"></div>
                     <p class="text-gray-500 max-w-xl mx-auto">We deliver professional ICT solutions backed by experience,
                         reliability, and ongoing support.</p>
                 </div>
@@ -260,7 +319,7 @@
                         <div
                             class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 flex gap-5 items-start">
                             <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
-                                style="background-color: {{ $feature['color'] }}15;">
+                                style="background-color: {{ $feature['color'] }}20;">
                                 <svg class="w-6 h-6" fill="none" stroke="{{ $feature['color'] }}" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="{{ $feature['icon'] }}" />
@@ -298,65 +357,73 @@
 
 @push('styles')
     <style>
-        /* Rich text content styling */
         .service-content h2 {
             font-size: 1.5rem;
             font-weight: 700;
             color: #003E7E;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             margin-bottom: 0.75rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #5FA9DD33;
+            border-bottom: 2px solid rgba(95, 169, 221, 0.25);
+            line-height: 1.3;
+        }
+
+        .service-content h2:first-child {
+            margin-top: 0;
         }
 
         .service-content h3 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 600;
             color: #003E7E;
-            margin-top: 1.5rem;
+            margin-top: 1.75rem;
             margin-bottom: 0.5rem;
         }
 
         .service-content p {
             color: #6E7173;
-            line-height: 1.8;
+            line-height: 1.85;
             margin-bottom: 1rem;
+            font-size: 0.975rem;
         }
 
         .service-content ul {
             list-style: none;
             padding: 0;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .service-content ul li {
             position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
+            padding-left: 1.6rem;
+            margin-bottom: 0.6rem;
             color: #6E7173;
-            line-height: 1.7;
+            line-height: 1.75;
+            font-size: 0.975rem;
         }
 
         .service-content ul li::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0.6rem;
+            top: 0.55rem;
             width: 8px;
             height: 8px;
             border-radius: 50%;
             background-color: #5FA9DD;
+            flex-shrink: 0;
         }
 
         .service-content ol {
             padding-left: 1.5rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
             color: #6E7173;
         }
 
         .service-content ol li {
-            margin-bottom: 0.5rem;
-            line-height: 1.7;
+            margin-bottom: 0.6rem;
+            line-height: 1.75;
+            font-size: 0.975rem;
         }
 
         .service-content strong {
@@ -371,10 +438,12 @@
 
         .service-content blockquote {
             border-left: 4px solid #5FA9DD;
-            padding-left: 1rem;
+            padding: 0.75rem 1rem;
             margin: 1.5rem 0;
             color: #6E7173;
             font-style: italic;
+            background-color: #f9fafb;
+            border-radius: 0 0.5rem 0.5rem 0;
         }
 
         .service-content table {
@@ -382,6 +451,9 @@
             border-collapse: collapse;
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .service-content table th {
@@ -390,6 +462,9 @@
             padding: 0.75rem 1rem;
             text-align: left;
             font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .service-content table td {
@@ -398,8 +473,69 @@
             color: #6E7173;
         }
 
+        .service-content table tr:last-child td {
+            border-bottom: none;
+        }
+
         .service-content table tr:nth-child(even) td {
             background-color: #f9fafb;
         }
     </style>
+@endpush
+
+@push('scripts')
+    <script>
+        function galleryCarousel() {
+            return {
+                current: 0,
+                total: {{ $service->gallery_images ? count($service->gallery_images) : 0 }},
+                visibleCount: 3,
+                autoplayInterval: null,
+
+                init() {
+                    this.updateVisibleCount();
+                    window.addEventListener('resize', () => this.updateVisibleCount());
+                    this.startAutoplay();
+                },
+
+                updateVisibleCount() {
+                    if (window.innerWidth < 640) {
+                        this.visibleCount = 1;
+                    } else if (window.innerWidth < 1024) {
+                        this.visibleCount = 2;
+                    } else {
+                        this.visibleCount = 3;
+                    }
+                },
+
+                maxIndex() {
+                    return Math.max(0, this.total - this.visibleCount);
+                },
+
+                next() {
+                    this.current = this.current >= this.maxIndex() ? 0 : this.current + 1;
+                    this.resetAutoplay();
+                },
+
+                prev() {
+                    this.current = this.current <= 0 ? this.maxIndex() : this.current - 1;
+                    this.resetAutoplay();
+                },
+
+                goTo(index) {
+                    this.current = Math.min(index, this.maxIndex());
+                    this.resetAutoplay();
+                },
+
+                startAutoplay() {
+                    this.autoplayInterval = setInterval(() => this.next(), 3500);
+                },
+
+                resetAutoplay() {
+                    clearInterval(this.autoplayInterval);
+                    this.startAutoplay();
+                }
+            }
+        }
+    </script>
 @endpush

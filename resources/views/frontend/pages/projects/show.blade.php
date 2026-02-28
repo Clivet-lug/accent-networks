@@ -85,24 +85,20 @@
                     {{-- Description --}}
                     <div class="project-content mb-12">
                         <h2 class="text-2xl font-bold mb-6 pb-3"
-                            style="color: #003E7E; border-bottom: 2px solid #5FA9DD33;">
+                            style="color: #003E7E; border-bottom: 2px solid rgba(95,169,221,0.25);">
                             Project Overview
                         </h2>
-                        <div class="prose-content">
-                            {!! $project->description !!}
-                        </div>
+                        <div>{!! $project->description !!}</div>
                     </div>
 
                     {{-- Scope --}}
                     @if ($project->scope)
                         <div class="project-content mb-12">
                             <h2 class="text-2xl font-bold mb-6 pb-3"
-                                style="color: #003E7E; border-bottom: 2px solid #5FA9DD33;">
+                                style="color: #003E7E; border-bottom: 2px solid rgba(95,169,221,0.25);">
                                 Project Scope
                             </h2>
-                            <div class="prose-content">
-                                {!! $project->scope !!}
-                            </div>
+                            <div>{!! $project->scope !!}</div>
                         </div>
                     @endif
 
@@ -110,12 +106,10 @@
                     @if ($project->technologies)
                         <div class="project-content mb-12">
                             <h2 class="text-2xl font-bold mb-6 pb-3"
-                                style="color: #003E7E; border-bottom: 2px solid #5FA9DD33;">
+                                style="color: #003E7E; border-bottom: 2px solid rgba(95,169,221,0.25);">
                                 Technologies Used
                             </h2>
-                            <div class="prose-content">
-                                {!! $project->technologies !!}
-                            </div>
+                            <div>{!! $project->technologies !!}</div>
                         </div>
                     @endif
 
@@ -123,38 +117,58 @@
                     @if ($project->before_image || $project->after_image)
                         <div class="mb-12">
                             <h2 class="text-2xl font-bold mb-6 pb-3"
-                                style="color: #003E7E; border-bottom: 2px solid #5FA9DD33;">
+                                style="color: #003E7E; border-bottom: 2px solid rgba(95,169,221,0.25);">
                                 Before & After
                             </h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 @if ($project->before_image)
-                                    <div class="relative">
-                                        <div class="absolute top-4 left-4 z-10">
-                                            <span
-                                                class="bg-red-500 text-white px-4 py-1.5 rounded-lg font-semibold text-sm">Before</span>
-                                        </div>
-                                        @php
-                                            $beforePath = str_contains($project->before_image, 'project-images/')
-                                                ? asset('storage/' . $project->before_image)
-                                                : asset('storage/project-images/' . $project->before_image);
-                                        @endphp
+                                    @php
+                                        $beforePath = str_contains($project->before_image, 'project-images/')
+                                            ? asset('storage/' . $project->before_image)
+                                            : asset('storage/project-images/' . $project->before_image);
+                                    @endphp
+                                    <div class="relative group overflow-hidden rounded-2xl shadow-xl">
                                         <img src="{{ $beforePath }}" alt="Before - {{ $project->title }}"
-                                            class="w-full h-72 object-cover rounded-xl shadow-lg">
+                                            class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500">
+                                        <div class="absolute inset-0"
+                                            style="background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);">
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-5">
+                                            <span
+                                                class="inline-flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                                Before
+                                            </span>
+                                        </div>
                                     </div>
                                 @endif
                                 @if ($project->after_image)
-                                    <div class="relative">
-                                        <div class="absolute top-4 left-4 z-10">
-                                            <span
-                                                class="bg-green-500 text-white px-4 py-1.5 rounded-lg font-semibold text-sm">After</span>
-                                        </div>
-                                        @php
-                                            $afterPath = str_contains($project->after_image, 'project-images/')
-                                                ? asset('storage/' . $project->after_image)
-                                                : asset('storage/project-images/' . $project->after_image);
-                                        @endphp
+                                    @php
+                                        $afterPath = str_contains($project->after_image, 'project-images/')
+                                            ? asset('storage/' . $project->after_image)
+                                            : asset('storage/project-images/' . $project->after_image);
+                                    @endphp
+                                    <div class="relative group overflow-hidden rounded-2xl shadow-xl">
                                         <img src="{{ $afterPath }}" alt="After - {{ $project->title }}"
-                                            class="w-full h-72 object-cover rounded-xl shadow-lg">
+                                            class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500">
+                                        <div class="absolute inset-0"
+                                            style="background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);">
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-5">
+                                            <span
+                                                class="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                After
+                                            </span>
+                                        </div>
                                     </div>
                                 @endif
                             </div>
@@ -288,24 +302,30 @@
             font-size: 1.4rem;
             font-weight: 700;
             color: #003E7E;
-            margin-top: 1.75rem;
+            margin-top: 2rem;
             margin-bottom: 0.75rem;
             padding-bottom: 0.4rem;
-            border-bottom: 2px solid #5FA9DD33;
+            border-bottom: 2px solid rgba(95, 169, 221, 0.25);
+            line-height: 1.3;
+        }
+
+        .project-content h2:first-child {
+            margin-top: 0;
         }
 
         .project-content h3 {
             font-size: 1.15rem;
             font-weight: 600;
             color: #003E7E;
-            margin-top: 1.25rem;
+            margin-top: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
         .project-content p {
             color: #6E7173;
-            line-height: 1.8;
+            line-height: 1.85;
             margin-bottom: 1rem;
+            font-size: 0.975rem;
         }
 
         .project-content ul {
@@ -316,17 +336,18 @@
 
         .project-content ul li {
             position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
+            padding-left: 1.6rem;
+            margin-bottom: 0.6rem;
             color: #6E7173;
-            line-height: 1.7;
+            line-height: 1.75;
+            font-size: 0.975rem;
         }
 
         .project-content ul li::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0.6rem;
+            top: 0.55rem;
             width: 8px;
             height: 8px;
             border-radius: 50%;
@@ -340,8 +361,9 @@
         }
 
         .project-content ol li {
-            margin-bottom: 0.5rem;
-            line-height: 1.7;
+            margin-bottom: 0.6rem;
+            line-height: 1.75;
+            font-size: 0.975rem;
         }
 
         .project-content strong {
@@ -356,10 +378,12 @@
 
         .project-content blockquote {
             border-left: 4px solid #5FA9DD;
-            padding-left: 1rem;
+            padding: 0.75rem 1rem;
             margin: 1.5rem 0;
             color: #6E7173;
             font-style: italic;
+            background-color: #f9fafb;
+            border-radius: 0 0.5rem 0.5rem 0;
         }
 
         .project-content table {
@@ -367,6 +391,9 @@
             border-collapse: collapse;
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .project-content table th {
@@ -375,12 +402,19 @@
             padding: 0.75rem 1rem;
             text-align: left;
             font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .project-content table td {
             padding: 0.65rem 1rem;
             border-bottom: 1px solid #e5e7eb;
             color: #6E7173;
+        }
+
+        .project-content table tr:last-child td {
+            border-bottom: none;
         }
 
         .project-content table tr:nth-child(even) td {
