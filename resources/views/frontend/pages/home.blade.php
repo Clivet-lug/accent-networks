@@ -57,7 +57,8 @@
                                 </a>
                                 <a href="{{ route('contact.index') }}"
                                     class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white transition shadow-lg"
-                                    style="hover:color: #003E7E;">
+                                    style="transition: all 0.2s;" onmouseover="this.style.color='#003E7E'"
+                                    onmouseout="this.style.color='white'">
                                     Get a Quote
                                 </a>
                             </div>
